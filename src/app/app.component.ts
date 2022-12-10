@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { interval, map, take, combineAll } from 'rxjs';
+import { interval, map, take, combineAll, concat, of } from 'rxjs';
 
 @Component({
   selector: 'my-app',
@@ -17,8 +17,10 @@ export class AppComponent {
       )
     )
   );
+  concat$ = concat(of(1, 2, 3), of(4, 5, 6), of(7, 8, 9));
   ngOnInit(): void {
     // this.source$.subscribe(console.log);
-    this.combineAllObj$.pipe(combineAll()).subscribe(console.log);
+    // this.combineAllObj$.pipe(combineAll()).subscribe(console.log);
+    this.concat$.subscribe(console.log);
   }
 }
