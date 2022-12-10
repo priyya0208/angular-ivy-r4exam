@@ -13,11 +13,12 @@ export class AppComponent {
     map((val) =>
       interval(1000).pipe(
         map((i) => `Result (${val}): ${i}`),
-        take(5)
+        take(3)
       )
     )
   );
   ngOnInit(): void {
+    // this.source$.subscribe(console.log);
     this.combineAllObj$.pipe(combineAll()).subscribe(console.log);
   }
 }
