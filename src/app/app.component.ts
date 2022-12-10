@@ -1,5 +1,5 @@
 import { Component, VERSION } from '@angular/core';
-import { interval, map, take } from 'rxjs';
+import { interval, map, take, combineAll } from 'rxjs';
 
 @Component({
   selector: 'my-app',
@@ -9,7 +9,7 @@ import { interval, map, take } from 'rxjs';
 export class AppComponent {
   name = 'Angular ' + VERSION.major;
   source$ = interval(1000).pipe(take(2));
-  combineAllObj = this.source$.pipe(
+  combineAllObj$ = this.source$.pipe(
     map((val) =>
       interval(1000).pipe(
         map((i) => `Result (${val}): ${i}`),
@@ -17,4 +17,7 @@ export class AppComponent {
       )
     )
   );
+  ngOnInit(): void {
+    this.combineAllObj$.pipe(combineAll());
+  }
 }
