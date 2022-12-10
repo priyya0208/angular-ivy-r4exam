@@ -18,6 +18,6 @@ export class AppComponent {
     )
   );
   ngOnInit(): void {
-    this.combineAllObj$.pipe(combineAll());
+    this.combineAllObj$.pipe(combineAll()).subscribe(() => console.log);
   }
 }
